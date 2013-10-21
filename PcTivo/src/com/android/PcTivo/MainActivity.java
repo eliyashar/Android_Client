@@ -1,6 +1,10 @@
 package com.android.PcTivo;
 
+import org.json.JSONObject;
+
 import android.os.Bundle;
+import android.os.Handler.Callback;
+import android.os.Message;
 import android.app.Activity;
 import android.view.Menu;
 import android.view.View;
@@ -8,7 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.view.View.OnClickListener;
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity{
 
 	private ImageView mPlayButton;
 	private ImageView mPrevButton;
@@ -52,14 +56,27 @@ public class MainActivity extends Activity {
     };
 	private void sendToServer(String button) {
 		mText.setText(button);
-		new PcTivoHttpClient(button).execute();
+		new PcTivoHttpClient(button, callback).execute();
 	}
 
+	public void onListResponse(JSONObject jsonObject) {
+		
+	}
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
+    Callback callback = new Callback() {
+
+		@Override
+		public boolean handleMessage(Message msg) {
+			String json = (String)msg.obj;
+			
+			return true;
+		}
+    	
+    };
     
 }
