@@ -1,8 +1,8 @@
 package com.android.PcTivo;
 
 public class MovieListResponse {
-	public MovieListResponse(String json) {
-
-		
-	}
+    
+    public MovieListResponse(String json) {
+    
+    }
 }
